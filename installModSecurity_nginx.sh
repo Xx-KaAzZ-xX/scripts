@@ -7,10 +7,8 @@
 # . Script to launch after compiling Nginx With ModSecurity to activate ModSecurity and import OWASP rules
 # . Update module's rules by the latest OWASP modsecurity rules
 #   https://github.com/SpiderLabs/owasp-modsecurity-crs/tree/master/activated_rules
-#
-set -x
 
-# OWASP modsecurity rules GIT url
+# VARIABLES
 OWASPGIT='https://github.com/SpiderLabs/owasp-modsecurity-crs'
 ModSecurityGIT='https://github.com/SpiderLabs/ModSecurity.git'
 Nginx_PATH='/usr/local/nginx'

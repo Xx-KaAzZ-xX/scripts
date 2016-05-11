@@ -77,6 +77,7 @@ a2enmod mod-security
 service apache2 restart
 com
 
+##Importation des règles modsecurity d'OWASP
 cd /usr/src/
 git clone $OWASPGIT
 cd owasp-modsecurity-crs

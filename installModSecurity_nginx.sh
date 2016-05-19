@@ -50,14 +50,14 @@ cd /usr/src
 git clone "${ModSecurityGIT}" modsecurity
 
 
-cp /usr/src/modsecurity/modsecurity.conf-recommended $Nginx_PATH/conf/modsecurity2.conf
+cp /usr/src/modsecurity/modsecurity.conf-recommended $Nginx_PATH/conf/modsecurity.conf
 
-if [ -f $Nginx_PATH/conf/modsecurity2.conf ]; then
-  sed -i 's#^SecRuleEngine\(.*\)$#SecRuleEngine On#g' $Nginx_PATH/conf/modsecurity2.conf
+if [ -f $Nginx_PATH/conf/modsecurity.conf ]; then
+  sed -i 's#^SecRuleEngine\(.*\)$#SecRuleEngine On#g' $Nginx_PATH/conf/modsecurity.conf
   # Fix upload max file size at 32M
-  sed -i 's#^SecRequestBodyLimit\(.*\)$#SecRequestBodyLimit 32768000#g' $Nginx_PATH/conf/modsecurity2.conf
-  sed -i 's#^SecRequestBodyInMemoryLimit\(.*\)$#SecRequestBodyInMemoryLimit 32768000#g' $Nginx_PATH/conf/modsecurity2.conf
-  sed -i 's#^SecResponseBodyAccess\(.*\)$#SecResponseBodyAccess Off#g' $Nginx_PATH/conf/modsecurity2.conf
+  sed -i 's#^SecRequestBodyLimit\(.*\)$#SecRequestBodyLimit 32768000#g' $Nginx_PATH/conf/modsecurity.conf
+  sed -i 's#^SecRequestBodyInMemoryLimit\(.*\)$#SecRequestBodyInMemoryLimit 32768000#g' $Nginx_PATH/conf/modsecurity.conf
+  sed -i 's#^SecResponseBodyAccess\(.*\)$#SecResponseBodyAccess Off#g' $Nginx_PATH/conf/modsecurity.conf
 fi
 
 
@@ -83,6 +83,6 @@ cp -R base_rules/ $Nginx_PATH/conf/
 
 ##Activation de mod_security avec Nginx
 
-sed -i '/gzip/a \#Enable ModSecurity\nModSecurityEnabled on;\nModSecurityConfig modsecurity.conf;\n' $Nginx_PATH/conf/nginx.test
+sed -i '/gzip/a \#Enable ModSecurity\nModSecurityEnabled on;\nModSecurityConfig modsecurity.conf;\n' $Nginx_PATH/conf/nginx.conf
 
 exit 0

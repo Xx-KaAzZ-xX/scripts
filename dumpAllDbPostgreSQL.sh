@@ -19,7 +19,7 @@ function usage() {
     - Each databae is stored in its own file and Gzip
       "
     }
-
+usage
     # Security
     # Test if the script is executed by backupit !
     [[ $(whoami) != "backupit" ]] && exit 1

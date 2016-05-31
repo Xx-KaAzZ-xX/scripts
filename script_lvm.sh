@@ -46,9 +46,10 @@ mkdir /mnt/$vg
 mount $lv_path /mnt/$vg
 e2label $lv_path $vg
 
-#Edition of fstab file to permanently mount the LV
+<<: 'COM' #Edition of fstab file to permanently mount the LV
 cp /etc/fstab /etc/fstab.bak
 echo -e "LABEL=$vg\t /mnt/$vg\t ext4 defaults 0 0" >> /etc/fstab
 
+COM
 
 exit 0

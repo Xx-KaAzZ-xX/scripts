@@ -32,11 +32,11 @@ tar -xvf nginx-1.6.2.tar.gz > /dev/null
  cd /root/modsecurity
 ./autogen.sh > /dev/null
 
-./configure --enable-standalone-module --disable-mlogc > /dev/null
-make > /dev/null
+./configure --enable-standalone-module --disable-mlogc
+make 
 cd /root/nginx-1.6.2
 
-./configure --conf-path=/etc/nginx/conf/nginx.conf --http-log-path=/var/log/nginx/access.log --error-log-path=/var/log/nginx/error.log --with-http_ssl_module --add-module=/root/modsecurity/nginx/modsecurity/ > /dev/null
+./configure --conf-path=/etc/nginx/conf/nginx.conf --http-log-path=/var/log/nginx/access.log --error-log-path=/var/log/nginx/error.log --with-http_ssl_module --add-module=/root/modsecurity/nginx/modsecurity/
 echo -e "\n Compiling Nginx... \n"
 
 #echo "dire où les fichiers iront si on laisse par défaut , ou mettre des variables pour la compil"

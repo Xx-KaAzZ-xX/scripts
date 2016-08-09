@@ -40,8 +40,8 @@ cd /root/nginx-1.6.2
 echo -e "\n Compiling Nginx... \n"
 
 #echo "dire où les fichiers iront si on laisse par défaut , ou mettre des variables pour la compil"
-make > /dev/null
-make install > /dev/null
+make
+make install
 #Symbolic link to access the nginx command from anywhere
 ln -s /usr/local/nginx/sbin/nginx /usr/sbin/nginx
 

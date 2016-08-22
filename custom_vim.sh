@@ -1,3 +1,5 @@
+#!/bin/bash
+
 apt-get install vim
     if [[ ! -f /etc/vim/vimrc.local ]]; then
         echo -e "syntax on \
@@ -13,4 +15,4 @@ apt-get install vim
             \nset expandtab \
             " > /etc/vim/vimrc.local
     fi
-}
+exit 0

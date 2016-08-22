@@ -1,7 +1,6 @@
-installPackage vim && log "Installation of Vim"
+apt-get install vim
     if [[ ! -f /etc/vim/vimrc.local ]]; then
         echo -e "syntax on \
-            \nset smarttab \
             \nset noet ci pi sts=0 sw=4 ts=4 \
             \nset cursorline \
             \nfiletype plugin indent on \
@@ -13,6 +12,5 @@ installPackage vim && log "Installation of Vim"
             \nset shiftwidth=2 \
             \nset expandtab \
             " > /etc/vim/vimrc.local
-        log "Configuration of Vim in /etc/vim/vimrc.local"
     fi
 }

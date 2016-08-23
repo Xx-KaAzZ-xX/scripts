@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Filename : newEnv.sh
+# Version  : 1.0
+# Author   : Aurélien Dubus
+# Contrib  :
+# Description : Créer un nouvel utilisateur avec Vhost ( Nginx / Apache), pool fpm , espace FTP (si package installé)
+#               et nouvel utilisateur SQL + nouvelle BDD
 
 if [[ ! -d "/root/scripts" ]]; then
     log "Please execute firstinstall.sh script before this one. Aborted..."

@@ -1,5 +1,5 @@
 #!/bin/bash
-set -x
+
 
 if [[ ! -d "/root/scripts" ]]; then
     log "Please execute firstinstall.sh script before this one. Aborted..."

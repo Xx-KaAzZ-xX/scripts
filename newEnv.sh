@@ -445,7 +445,9 @@ bash /root/scripts/Shell/web/ftp/createFtpUserWithQuota.sh
 fi
 
 /etc/init.d/php5-fpm restart
-a2ensite ${url} || a2ensite ${url}.conf
-/etc/init.d/apache2 reload
+#a2ensite ${url} || a2ensite ${url}.conf
+#/etc/init.d/apache2 reload
+
+echo "Vhost will have to be activated"
 
 exit 0

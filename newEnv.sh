@@ -16,7 +16,6 @@ machineName=$(cat /etc/hostname)
 
 ##Création user/dossier
 read -p "Entrer le nom de l'utilisateur : " username
-echo "${username}"
 adduser ${username}
 mkdir /home/$username/{www,tmp,logs,sessions,.socks,cgi-bin}
 chown -R $username:$username /home/$username/{www,tmp,logs,sessions,.socks,cgi-bin}
@@ -32,7 +31,7 @@ case $choice in
   1*)
     echo -e "Création du nouveau Vhost pour Apache\n"
 
-## voir if en fonction de la version d'apache
+## Conf file to apply according to Apache version
 version=$(apache2 -v | grep version | awk {'print $3'} | awk -F / {'print $2'} | awk -F . {'print $2'})
 if [ "$version" -ne "4" ]
 then

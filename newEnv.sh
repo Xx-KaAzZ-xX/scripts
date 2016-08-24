@@ -444,6 +444,11 @@ else
 bash /root/scripts/Shell/web/ftp/createFtpUserWithQuota.sh
 fi
 
+##SSH-Keygen
+
+runuser -l $username -c 'ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa'
+
+
 /etc/init.d/php5-fpm restart
 #a2ensite ${url} || a2ensite ${url}.conf
 #/etc/init.d/apache2 reload

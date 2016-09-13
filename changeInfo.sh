@@ -48,7 +48,8 @@ esac
 echo "Renseigner le nom de la machine"
 read name
 echo "${name}" > /etc/hostname
-
+sed -i 's/template/'"${name}"'/g' /etc/hosts
+service hostname.sh
 echo "Renseigner le nouveau mot de passe root"
 read -s root_password
 echo "root:$root_password" | chpasswd

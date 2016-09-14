@@ -145,8 +145,9 @@ else
   </FilesMatch>
   <IfModule mod_fastcgi.c>
     <Directory /home/${username}/cgi-bin>
-      Order allow,deny
-      Allow from all
+      #Order allow,deny
+      #Allow from all
+      Require all granted
     </Directory>
     <FilesMatch "\.php[345]?$">
       SetHandler php5-fcgi

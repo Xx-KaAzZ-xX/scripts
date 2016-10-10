@@ -52,29 +52,84 @@ touch $Nginx_PATH/sites-available/phpmyadmin
 #Nginx VHOST
 cat >> $Nginx_PATH/sites-available/phpmyadmin << _EOF_
   server {
-          listen 8888;
-          #server_name localhost;
-
-          root /opt/phpmyadmin/www;
-
-          # Add index.php to the list if you are using PHP
-          index index.php index.html index.htm index.nginx-debian.html;
-
-          ## Access and error logs.
-          access_log /opt/phpmyadmin/logs/access.log;
-          error_log /opt/phpmyadmin/logs/errors.log;
+  listen 8888 default_server;
+  server_name _;
+ 
+  root /opt/phpmyadmin/www/;
+ 
+  index index.php;
+  charset utf-8;
+ 
   location / {
-          # First attempt to serve request as file, then
-          # as directory, then fall back to displaying a 404.
-          try_files $uri $uri/ =404;
-          index index.php;
-          ##Autoriser l'accès avec ModSecurity
-            } 
-        # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
-        location ~ \.php$ {
-        include fastcgi.conf;
-        fastcgi_pass unix:/opt/phpmyadmin/.socks/phpmyadmin.sock;
-        include fastcgi_params;
+    index  index.php;
+  }
+ 
+  error_log /opt/phpmyadmin/logs/error.log warn;
+  access_log /opt/phpmyadmin/logs/access.log;
+ 
+  location ~ \.php$ {
+    include snippets/fastcgi-php.conf;
+    # With php5-cgi alone:
+    # fastcgi_pass 127.0.0.1:9000;
+    # # With php5-fpm:
+    fastcgi_pass unix:/opt/phpmyadmin/.socks/phpmyadmin.sock;
+    include fastcgi_params;
+    # Custom conf
+    fastcgi_split_path_info ^(.+\.php)(.*)$;
+    #fastcgi_index  index.php;
+    fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+    fastcgi_param  SCRIPT_NAME      $fastcgi_script_name;
+    fastcgi_param  QUERY_STRING     $query_string;
+    fastcgi_param  REQUEST_METHOD   $request_method;
+    fastcgi_param  CONTENT_TYPE     $content_type;
+    fastcgi_param  CONTENT_LENGTH   $content_length;
+    fastcgi_intercept_errors        on;
+    fastcgi_ignore_client_abort     off;
+    fastcgi_connect_timeout 300;
+    fastcgi_send_timeout 180;
+    fastcgi_read_timeout 180;
+    fastcgi_buffer_size 128k;
+    fastcgi_buffers 4 256k;
+    fastcgi_busy_buffers_size 256k;
+    fastcgi_temp_file_write_size 256k;
+  }
+ 
+  # deny access to .htaccess files, if Apache's document root
+  # concurs with nginx's one
+  #
+  location ~ /\.ht {
+    deny all;
+    return 404;
+  }
+ 
+  location ~ /\.git {
+    deny all;
+    return 404;
+  }
+ 
+  location /setup {
+    deny all;
+    return 404;
+  }
+ 
+  location /sql {
+    deny all;
+    return 404;
+  }
+ 
+  location /test {
+    deny all;
+    return 404;
+  }
+ 
+  location /libraries {
+    deny all;
+    return 404;
+  }
+ 
+  location ~ ^/(README|ChangeLog|RELEASE.*|LICENCE)$ {
+    deny all;
+    return 404;
   }
 }
 _EOF_

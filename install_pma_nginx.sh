@@ -7,8 +7,7 @@
 # Description :
 #  . Install PhpMyAdmin on port 8888 with Nginx Web Server
 #
-echo "Renseigner le chemin d'installation de Nginx.[Ex : /etc/nginx]"
-read Nginx_PATH
+Nginx_PATH="/etc/nginx"
 apt-get install phpmyadmin
 addgroup --system --gid 990 phpmyadmin
 adduser --system --home /opt/phpmyadmin --uid 990 --gid 990 --shell /bin/sh phpmyadmin
@@ -41,7 +40,6 @@ echo "
 " >> /opt/phpmyadmin/www/config.inc.php
 chown -R phpmyadmin:phpmyadmin /opt/phpmyadmin/
 
-mkdir $Nginx_PATH/sites-available $Nginx_PATH/sites-enabled
 
 #Création du VHOST PhpMyAdmin pour Nginx
 touch $Nginx_PATH/sites-available/phpmyadmin

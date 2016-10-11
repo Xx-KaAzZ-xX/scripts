@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Filename : newEnv.sh
-# Version  : 1.0
+# Version  : 1.1
 # Author   : Aurélien Dubus
 # Contrib  :
 # Description : Créer un nouvel utilisateur avec Vhost ( Nginx / Apache), pool fpm , espace FTP (si package installé),

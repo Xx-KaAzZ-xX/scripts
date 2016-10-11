@@ -20,15 +20,15 @@ case "$1" in
   -p | --port)
     ##Surveille les co entrantes , si une ligne est ajoutée , alors modif du file2
     while true; do
-    lsof -i :${port} | grep ESTABLISHED > ${file}
-    before="$(wc -l ${file} | awk '{printf $1}')"
-    after="$(wc -l ${file} | awk '{printf $1}')"
-    
-    echo "before : $before"
-    echo "after : $after"
-      if [ "$after" -gt "$before" ]
+      before=$(lsof -i :${port} | grep ESTABLISHED | wc -l)
+      after=$(lsof -i :${port} | grep ESTABLISHED | wc -l)
+
+      echo "before : $before"
+      echo "after : $after"
+      if [[ "$after" > "$before" ]]
         then
-        echo "New connection" > ${file2}
+        #echo "New connection" > ${file2}
+        
       fi
     sleep 10
 done

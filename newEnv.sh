@@ -313,6 +313,32 @@ fi
 ;;
 esac
 
+echo -e "Création du logrotate\n"
+
+if [ ! -f /etc/logrotate.d/nginx ]
+then
+cat >> /etc/logrotate.d/nginx << _EOF_
+/home/${username}/logs/*.log {
+        weekly
+        missingok
+        rotate 52
+        compress
+        delaycompress
+        notifempty
+        create 0640 root root
+        sharedscripts
+        prerotate
+                if [ -d /etc/logrotate.d/httpd-prerotate ]; then \
+                        run-parts /etc/logrotate.d/httpd-prerotate; \
+                fi \
+        endscript
+        postrotate
+                invoke-rc.d nginx rotate >/dev/null 2>&1
+        endscript
+}
+_EOF_
+fi
+
 echo -e "Création du pool FPM\n"
 if [ ! -f /etc/php5/fpm/pool.d/${username}.conf ]
 then
